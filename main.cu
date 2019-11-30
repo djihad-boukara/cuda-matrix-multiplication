@@ -35,7 +35,7 @@ int main(int argc, char const* argv[])
 
 		// run product on the GPU @see matmatCuda
 		cudaStatus = matmatCuda(MAT_SIZE, MAT_SIZE, MAT_SIZE,
-								i, i, i, A_h, B_h, C_d);
+					i, i, i, A_h, B_h, C_d);
 
 		// records the end event
 		cudaEventRecord(stop_gpu, 0);
