@@ -1,7 +1,7 @@
 #include "cuda_mat_lib.h"
 
 cudaError_t matmatCuda(int lda, int ldb, int ldc,
-					   int n, int m, int p, double* A, double* B, double* C)
+		       int n, int m, int p, double* A, double* B, double* C)
 {
 	double* A_d = NULL;
 	double* B_d = NULL;
@@ -73,8 +73,8 @@ cudaError_t matmatCuda(int lda, int ldb, int ldc,
 
 	// copy matrices from RAM to GPU memory
 	cudaStatus = cudaMemcpy2D(A_d, mwidth * sizeof(double),
-							  A, lda * sizeof(double),
-							  m * sizeof(double), n, cudaMemcpyHostToDevice);
+				  A, lda * sizeof(double),
+				  m * sizeof(double), n, cudaMemcpyHostToDevice);
 
 	if (cudaStatus != cudaSuccess) {
 		fprintf(stderr, "5: cudaMemcpy2D failed!\n");
@@ -82,8 +82,8 @@ cudaError_t matmatCuda(int lda, int ldb, int ldc,
 	}
 
 	cudaStatus = cudaMemcpy2D(B_d, pwidth * sizeof(double),
-							  B, ldb * sizeof(double), p * sizeof(double),
-							  m, cudaMemcpyHostToDevice);
+				  B, ldb * sizeof(double), p * sizeof(double),
+				  m, cudaMemcpyHostToDevice);
 
 	if (cudaStatus != cudaSuccess) {
 		fprintf(stderr, "6: cudaMemcpy2D failed!\n");
@@ -102,8 +102,8 @@ cudaError_t matmatCuda(int lda, int ldb, int ldc,
 
 	// copies the result from the GPU memory to the RAM memory
 	cudaStatus = cudaMemcpy2D(C, ldc * sizeof(double),
-							  C_d, pwidth * sizeof(double), p * sizeof(double),
-							  n, cudaMemcpyDeviceToHost);
+				  C_d, pwidth * sizeof(double), p * sizeof(double),
+				  n, cudaMemcpyDeviceToHost);
 
 	if (cudaStatus != cudaSuccess) {
 		fprintf(stderr, "7: cudaMemcpy2D failed!\n");
