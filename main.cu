@@ -6,15 +6,12 @@
 int main(int argc, char const* argv[])
 {
 	double* A_h, * B_h, * C_d; // matrixes
-	double gflops_gpu;
+	double gflops_gpu, gpuTime;
 	float elapsed;
 
 	// event variables used to estimate 
 	// the execution times on the GPU
 	cudaEvent_t start_gpu, stop_gpu;
-
-	double gpuTime;
-
 	cudaError_t cudaStatus;
 
 	// matrices allocation and filling
